@@ -33,6 +33,7 @@ public class RandomPasssword {
         //文本框
         JTextField jtf = new JTextField();
         Dimension dm = new Dimension(50, 20);
+
         //(除了JFrame)其它所有组件设置大小都是该方法
         jtf.setPreferredSize(dm);
         jf.add(jtf);
@@ -58,7 +59,19 @@ public class RandomPasssword {
         jbu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jtf2.setText(getPasswordOne(jcb.isSelected(),jcb2.isSelected(),jcb3.isSelected(),Integer.parseInt(jtf.getText())));
+                //输入校验
+                try{
+                    int num = Integer.parseInt(jtf.getText());
+                    if(num>7&&num<19) {
+                        jtf2.setText(getPasswordOne(jcb.isSelected(), jcb2.isSelected(), jcb3.isSelected(), num));
+                    }else{
+                        jtf2.setText("请输入8~18位数字");
+                        jtf.setText("");
+                    }
+                }catch (Exception ex){
+                    jtf2.setText("请输入数字！");
+                    jtf.setText("");
+                }
             }
         });
 
